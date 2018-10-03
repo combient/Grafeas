@@ -124,6 +124,7 @@ func (pg *pgSQLStore) GetProject(pID string) (*pb.Project, error) {
 	var exists bool
 	err := pg.DB.QueryRow(projectExists, pName).Scan(&exists)
 	if err != nil {
+		log.Println(err)
 		return nil, status.Error(codes.Internal, "Failed to query Project from database")
 	}
 	if !exists {
